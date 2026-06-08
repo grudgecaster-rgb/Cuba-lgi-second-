@@ -1,0 +1,235 @@
+/* --- RESET & BASE STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Memasukkan gambar corak bunga peony sebagai background penuh */
+    background-image: url('IMG_20260608_173831.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Efek lapisan lembut di atas gambar supaya teks surat senang dibaca */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 240, 243, 0.2); /* Layer pink cair gila */
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Letak container di atas lapisan background */
+}
+
+/* --- ENVELOPE DESIGN --- */
+.envelope-wrapper {
+    position: absolute;
+    width: 280px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    z-index: 2;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #fff9fa;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 30px rgba(217, 70, 99, 0.2);
+    border: 1px solid #ffe5ec;
+}
+
+/* Penutup Envelope (Flap) */
+.flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 110px solid #ffccd5;
+    transform-origin: top;
+    transition: transform 0.6s ease 0.2s;
+    z-index: 4;
+}
+
+/* Poket Envelope */
+.pocket {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 140px solid #ffb3c1;
+    border-right: 140px solid #ffb3c1;
+    border-bottom: 100px solid #ff85a1;
+    border-radius: 0 0 10px 10px;
+    z-index: 3;
+}
+
+/* Tulisan Depan Envelope */
+.envelope-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 45px;
+    z-index: 5;
+    color: #4a4a4a;
+}
+
+.for-text { 
+    font-size: 11px; 
+    letter-spacing: 3px; 
+    color: #a3485e;
+}
+
+.baby-name { 
+    font-family: 'Dancing Script', cursive; 
+    font-size: 32px; 
+    color: #c9184a; 
+    margin-top: 5px;
+}
+
+.tap-hint { 
+    font-size: 10px; 
+    margin-top: 25px; 
+    color: #a3485e;
+    opacity: 0.8; 
+    animation: pulse 1.5s infinite; 
+}
+
+/* --- ANIMASI BUKA ENVELOPE --- */
+.envelope-wrapper.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.open {
+    transform: translateY(250px) scale(0.7);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- KAD SURAT --- */
+.letter-card {
+    position: absolute;
+    width: 90%;
+    max-width: 340px;
+    background: rgba(255, 255, 255, 0.95); /* Putih semi-transparent sikit */
+    padding: 35px 25px;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(163, 72, 94, 0.25);
+    border: 2px solid #ffccd5;
+    opacity: 0;
+    transform: translateY(150px) scale(0.8);
+    transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
+    z-index: 3;
+    backdrop-filter: blur(5px); /* Efek glassmorphism lembut */
+}
+
+.letter-card.slide-up {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.hidden { 
+    display: none; 
+}
+
+.letter-header h2 {
+    font-size: 22px;
+    color: #5c3d45;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.date {
+    font-size: 11px;
+    color: #9e7a82;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ff85a1, transparent);
+    margin: 20px 0;
+}
+
+.letter-body h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    color: #c9184a;
+    margin-bottom: 15px;
+}
+
+.message {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #4a4a4a;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 26px;
+    color: #c9184a;
+    text-align: right;
+    margin-top: 30px;
+}
+
+/* --- AMBIENT ANIMATIONS --- */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.6; }
+}
+
+.heart-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Kelopak bunga luruh kecil untuk tambah efek dinamik */
+.peony-petal {
+    position: absolute;
+    bottom: -50px;
+    font-size: 16px;
+    opacity: 0.8;
+    animation: floatAndSpin linear forwards;
+}
+
+@keyframes floatAndSpin {
+    0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+    50% { transform: translateY(-50vh) rotate(180deg) translateX(15px); }
+    100% { transform: translateY(-105vh) rotate(360deg) translateX(-15px); opacity: 0; }
+}
